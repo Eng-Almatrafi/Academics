@@ -1,0 +1,63 @@
+﻿@model Section
+
+<form method="post">
+
+    <div class="border p-3 mt-4 ">
+        <div class="row pb-2">
+            <h2 class="text-primary">
+                Add New Section
+            </h2>
+            <hr />
+        </div>
+        <div asp-validation-summary="All" class="text-danger"></div> @*her is validate on all fields   *@
+        <div class="mb-3 row p-1">
+            <label class="p-0">Section ID</label>
+            <input asp-for="Id" class="form-control" />
+        </div>
+        <div class="mb-3 row p-1">
+            <label class="p-0">Section Name</label>
+            <input asp-for="SectionName" class="form-control" />
+        </div>
+        <div class="mb-3 row p-1">
+            <label class="p-0">Start Date</label>
+            <input type="date" asp-for="DateRange.StartDate" class="form-control" />
+        </div>
+        <div class="mb-3 row p-1">
+            <label class="p-0">End Date</label>
+            <input type="date" asp-for="DateRange.EndDate" class="form-control" />
+        </div>
+        <div class="mb-3 row p-1">
+            <label class="p-0">Start Time</label>
+            <input type="time" asp-for="TimeSlot.StartTime" class="form-control" />
+        </div>
+        <div class="mb-3 row p-1">
+            <label class="p-0">End Time</label>
+            <input type="time" asp-for="TimeSlot.EndTime" class="form-control" />
+        </div>
+        <div class="mb-3 row p-1">
+            <label class="p-0">Course Name</label>
+            <input  asp-for="Course.CourseName" class="form-control" />
+        </div>
+        <div class="mb-3 row p-1">
+            <label class="p-0">Instructor Name</label>
+            <input  asp-for="Instructor.FullName" class="form-control" />
+        </div>
+        <div class="mb-3 row p-1">
+            <label class="p-0">Schedual Type</label>
+            <input  asp-for="Schedule.ScheduleType" class="form-control" />
+        </div>
+        <div class="row">
+            <div class="col-6 col-md-3">
+                <button type="submit" class="btn btn-primary form-control">Delete</button>
+            </div>
+            <div class="col-6 col-md-3">
+                <a asp-controller="Section" asp-action="index" class="btn btn-secondary form-control border">Back To List</a>
+            </div>
+
+        </div>
+
+    </div>
+</form>
+
+
+

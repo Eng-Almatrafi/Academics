@@ -1,0 +1,96 @@
+﻿@model ParticipantsVM
+<form method="post">
+    <div asp-validation-summary="All" class="text-danger"></div> @*her is validate on all fields   *@
+    <div class="border p-3 mt-4" @(Model.Individual == null ? "hidden" : "")>
+        <div class="row pb-2">
+            <h2 class="text-primary">
+                Update Individual Participant
+            </h2>
+            <hr />
+        </div>
+        <div class="mb-3 row p-1">
+            <label class="p-0">Individual ID</label>
+            <input asp-for="Individual.Id" class="form-control"  />
+        </div>
+        <div class="mb-3 row p-1">
+            <label class="p-0">First Name</label>
+            <input asp-for="Individual.FName" class="form-control" />
+        </div>
+        <div class="mb-3 row p-1">
+            <label class="p-0">Last Name</label>
+            <input asp-for="Individual.LName" class="form-control" />
+        </div>
+        <div class="mb-3 row p-1">
+            <label class="p-0">University</label>
+            <input asp-for="Individual.University" class="form-control" />
+        </div>
+        <div class="mb-3 row p-1">
+            <label class="p-0">Year Of Graduation</label>
+            <input asp-for="Individual.YearOfGraduation" class="form-control" />
+        </div>
+        <div class="mb-3 row p-1">
+            <label class="p-0">Is Intern</label>
+            <select asp-for="Individual.IsIntern" class="form-select">
+                <option>Select menu</option>
+                @if (Model.Individual.IsIntern == true)
+                {
+                    <option selected>True </option>
+                    <option>False</option>
+                }
+                else
+                {
+                    <option selected>False</option>
+                    <option>True </option>
+                }
+            </select>
+        </div>
+        <div class="row">
+            <div class="col-6 col-md-3">
+                <button type="submit" class="btn btn-primary form-control">Update</button>
+            </div>
+            <div class="col-6 col-md-3">
+                <a asp-controller="Participant" asp-action="index" class="btn btn-secondary form-control border">Back To List</a>
+            </div>
+        </div>
+    </div>
+</form>
+
+<form method="post">
+    <div asp-validation-summary="All" class="text-danger"></div> @*her is validate on all fields   *@
+    <div class="border p-3 mt-4" @(Model.Corporate == null ? "hidden" : "")>
+        <div class="row pb-2">
+            <h2 class="text-primary">
+                Update Corporate Participant
+            </h2>
+            <hr />
+        </div>
+        <div class="mb-3 row p-1">
+            <label class="p-0">Corporate ID</label>
+            <input asp-for="Corporate.Id" class="form-control" />
+        </div>
+        <div class="mb-3 row p-1">
+            <label class="p-0">First Name</label>
+            <input asp-for="Corporate.FName" class="form-control" />
+        </div>
+        <div class="mb-3 row p-1">
+            <label class="p-0">Last Name</label>
+            <input asp-for="Corporate.LName" class="form-control" />
+        </div>
+        <div class="mb-3 row p-1">
+            <label class="p-0">Company</label>
+            <input asp-for="Corporate.Company" class="form-control" />
+        </div>
+        <div class="mb-3 row p-1">
+            <label class="p-0">Job Title</label>
+            <input asp-for="Corporate.JobTitle" class="form-control" />
+        </div>
+        <div class="row">
+            <div class="col-6 col-md-3">
+                <button type="submit" class="btn btn-primary form-control">Update</button>
+            </div>
+            <div class="col-6 col-md-3">
+                <a asp-controller="Participant" asp-action="index" class="btn btn-secondary form-control border">Back To List</a>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,39 @@
+﻿@model Office
+
+<form method="post">
+    <input asp-for="Id" hidden />
+    <div class="border p-3 mt-4 ">
+        <div class="row pb-2">
+            <h2 class="text-primary">
+                Delete Office
+            </h2>
+            <hr />
+        </div>
+        <div class="mb-3 row p-1">
+            <label class="p-0">Office ID</label>
+            <input asp-for="Id" class="form-control" disabled />
+        </div>
+        <div class="mb-3 row p-1">
+            <label class="p-0">Office Name</label>
+            <input asp-for="OfficeName" class="form-control" disabled />
+        </div>
+        <div class="mb-3 row p-1">
+            <label class="p-0">office Loaction</label>
+            <input asp-for="OfficeLocation" class="form-control" disabled />
+        </div>
+        <div class="mb-3 row p-1">
+            <label class="p-0">Office Enabled</label>
+            <input asp-for="OfficeEnabled" class="form-control" disabled />
+        </div>
+        <div class="row">
+            <div class="col-6 col-md-3">
+                <button type="submit" class="btn btn-primary form-control">Delete</button>
+            </div>
+            <div class="col-6 col-md-3">
+                <a asp-controller="Office" asp-action="Index" class="btn btn-secondary form-control border">Back To List</a>
+            </div>
+
+        </div>
+
+    </div>
+</form>

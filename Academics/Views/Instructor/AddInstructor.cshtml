@@ -1,0 +1,58 @@
+﻿@model Instructor
+@{
+    var OfficeList = ViewBag.data as IEnumerable<Academics.Models.Office>;
+}
+<form method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="border p-3 mt-4 ">
+        <div class="row pb-2">
+            <h2 class="text-primary">
+                Add New Instructor
+            </h2>
+            <hr />
+        </div>
+        <div class="mb-3 row p-1">
+            <label class="p-0">Instructor ID</label>
+            <input asp-for="Id" class="form-control" />
+        </div>
+        <div class="mb-3 row p-1">
+            <label class="p-0">First Name</label>
+            <input asp-for="FName" class="form-control" />
+        </div>
+        <div class="mb-3 row p-1">
+            <label class="p-0">Last Name</label>
+            <input asp-for="LName" class="form-control" />
+        </div>
+        <div class="mb-3 row p-1">
+            <label class="p-0">Select Office</label>
+            <select asp-for="OfficeId">
+               
+                @foreach (var item in OfficeList)
+                {
+                    <option value=@item.Id>@item.OfficeName</option>
+                }
+                
+                
+            </select>
+        </div>
+        <div class="row">
+            <div class="col-6 col-md-3">
+                <button type="submit" class="btn btn-primary form-control">Submit</button>
+            </div>
+            <div class="col-6 col-md-3">
+                <a asp-controller="Instructor" asp-action="index" class="btn btn-secondary form-control border">Back To List</a>
+            </div>
+
+        </div>
+
+    </div>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+
+}
+
+
+

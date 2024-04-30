@@ -1,0 +1,73 @@
+﻿@model PaginatedList<Office>
+
+<div class="container">
+    <div class="row pt-4 pb-3">
+        <div class="col-6">
+            <h2 class="text-primary">
+                Offices List
+            </h2>
+        </div>
+        <div class="col-6 text-end ">
+            <a asp-controller="Office" asp-action="Add" class="btn btn-primary ">Add New Office</a>
+        </div>
+    </div>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Office Name</th>
+                <th>Location</th>
+                <th>Office Enabled</th>
+        </thead>
+
+        <tbody>
+            @foreach (var Office in Model.Entity)
+            {
+                <tr>
+                    <td>@Office.Id</td>
+                    <td>@Office.OfficeName</td>
+                    <td>@Office.OfficeLocation</td>
+                    <td>@Office.OfficeEnabled</td>
+                    <td>
+                        <div class="w-100 btn-group " role="group">
+                            <a asp-controller="Office" asp-action="Edit" asp-route-Id="@Office.Id" class="btn btn-primary btn-sm mx-2 "><i class="bi bi-pencil-square "></i> Edit</a>
+                            <a asp-controller="Office" asp-action="Delete" asp-route-Id="@Office.Id" class="btn btn-danger btn-sm mx-2"><i class="bi bi-trash "></i> Delete</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            @if (Model.CurrentPage > 1)
+            {
+                <li class="page-item">
+                    <a class="page-link" href="/Office/index?currentPage=@(Model.CurrentPage-1)" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+            }
+            @for (int i = 1; i <= Model.TotalPages; i++)
+            {
+                if (i == Model.CurrentPage)
+                {
+                    <li class="page-item"><a class="page-link active" href="/Office/index?currentPage=@i"> @i</a></li>
+                }
+                else
+                {
+                    <li class="page-item"><a class="page-link" href="/Office/index?currentPage=@i"> @i</a></li>
+                }
+            }
+            @if (Model.CurrentPage < Model.TotalPages)
+            {
+                <li class="page-item">
+                    <a class="page-link" href="/Office/index?currentPage=@(Model.CurrentPage+1)" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            }
+        </ul>
+    </nav>
+</div>

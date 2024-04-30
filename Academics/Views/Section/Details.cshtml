@@ -1,0 +1,120 @@
+﻿@model Section
+<div class="card shadow border-0 mt-4" style="margin-bottom:150px">
+    <div class="card-header bg-secondary bg-gradient ml-0 rounded-2 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Sections Details</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <div class="row pb-3">
+            <div class="col-6">
+            </div>
+            <div class="col-6 text-end">
+                <a asp-controller="Section" asp-action="index" class="btn btn-info">
+                      Back To Sectios List
+                </a>
+            </div>
+        </div>
+        <div class="container-fluid border border-secondary-subtle">
+        <div class="row p-3 ">
+            <div class="col-6 text-info h6">
+                <label class="mx-2 ">Section ID : @Model.Id </label>
+            </div>
+            <div class="col-6 text-info h6">
+                <label class="mx-2">Section Name : @Model.SectionName</label>
+            </div>
+        </div>
+        <div class="row p-3">
+            <div class="col-4  text-info h6">
+                <label class="mx-2 ">Course Name :@Model.Course.CourseName </label>
+            </div>
+            <div class="col-4 text-info  h6">
+                <label class="mx-2">Instructor Name : @Model.Instructor.FullName</label>
+            </div>
+            <div class="col-4 text-info  h6">
+                 <label class="mx-2">Schedule Type : @Model.Schedule.ScheduleType</label>
+            </div>
+        </div>
+            <div class="row p-3 ">
+                <div class="col-6  text-info h6">
+                    <label class="mx-2 ">Date Range : @Model.DateRange</label>
+                </div>
+                <div class="col-6 text-info h6">
+                    <label class="mx-2">Time Slot : @Model.TimeSlot</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row pb-3 mt-3">
+            <div class="col-6">
+                <div>
+                    <h3 >Participants List In Section</h3>
+                </div>
+            </div>
+            <div class="col-6 text-end">
+                <a class="btn btn-info" data-bs-toggle="collapse" href="#Enrollment">
+                    <i class="bi bi-plus-circle"></i>  Register Participant in Section
+                </a>
+            </div>
+        </div>
+        <div class="collapse p-2" id="Enrollment">
+            <form method="post" asp-action="Details">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div> @*her is validate on all fields   *@
+                <input asp-for="Id" hidden name="Id" />
+                <input type="text" name="flag" value="register" hidden />
+                <div class="border p-3 mt-4">
+                    <div class="row pb-2">
+                        <h2 class="text-primary">
+                            Register Participant in Section
+                        </h2>
+                        <hr />
+                    </div>
+                    <div class="mb-3 row">
+                        <div class="col-sm-4">
+                            <input type="text" name="participatnId" class="form-control" placeholder="Enter Participant ID" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 col-md-3">
+                            <input type="submit" value="Register" class="btn btn-primary form-control" />
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <a class="btn btn-secondary form-control border" data-bs-toggle="collapse" href="#Enrollment">Cancel</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Full Name</th>
+            </thead>
+
+            <tbody>
+                @foreach (var Participant in Model.Participants)
+                {
+                    <tr>
+                        <td>@Participant.Id</td>
+                        <td>@Participant.FullName</td>
+                        <td>
+                            <div class="w-100 btn-group " role="group">
+                                <a asp-controller="Section" asp-action="details" asp-route-participatnId="@Participant.Id" asp-route-SectionId="@Model.Id" asp-route-flag="remove" class="btn btn-danger btn-sm mx-2"><i class="bi bi-trash"></i> Remove</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+    
+
+

@@ -1,0 +1,44 @@
+﻿@model Instructor
+
+<form method="post">
+    <input asp-for="Id" hidden />
+    <div class="border p-3 mt-4 ">
+        <div class="row pb-2">
+            <h2 class="text-primary">
+                Edit Instructor
+            </h2>
+            <hr />
+        </div>
+        <div asp-validation-summary="All" class="text-danger"></div> @*her is validate on all fields   *@
+        <div class="mb-3 row p-1">
+            <label class="p-0">Instructor ID</label>
+            <input asp-for="Id" class="form-control" />
+        </div>
+        <div class="mb-3 row p-1">
+            <label class="p-0">First Name</label>
+            <input asp-for="FName" class="form-control" />
+        </div>
+        <div class="mb-3 row p-1">
+            <label class="p-0">Last Name</label>
+            <input asp-for="LName" class="form-control" />
+        </div>
+        <div class="mb-3 row p-1">
+            <label class="p-0">Office Id</label>
+            <input asp-for="OfficeId" class="form-control" />
+        </div>
+        <div class="row">
+            <div class="col-6 col-md-3">
+                <button type="submit" class="btn btn-primary form-control">Submit</button>
+            </div>
+            <div class="col-6 col-md-3">
+                <a asp-controller="Instructor" asp-action="index" class="btn btn-secondary form-control border">Back To List</a>
+            </div>
+
+        </div>
+
+    </div>
+</form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+}

@@ -1,0 +1,106 @@
+﻿@model ParticipantsVM
+
+<form method="post">
+    <div asp-validation-summary="All" class="text-danger"></div> @*her is validate on all fields   *@
+
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="Individual-tab" data-bs-toggle="tab" data-bs-target="#Individual" type="button" role="tab" aria-controls="Individual" aria-selected="true">Individual</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="Corporate-tab" data-bs-toggle="tab" data-bs-target="#Corporate" type="button" role="tab" aria-controls="Corporate" aria-selected="false">Corporate</button>
+        </li>
+    </ul>
+    <div class="tab-content" id="myTabContent" >
+        <div class="tab-pane fade show active" id="Individual" role="tabpanel" aria-labelledby="Individual-tab">
+            <div class="border p-3 mt-4 ">
+                <div class="row pb-2">
+                    <h2 class="text-primary">
+                        Add New Individual Participant
+                    </h2>
+                    <hr />
+                </div>
+                <div class="mb-3 row p-1">
+                    <label class="p-0">Individual ID</label>
+                    <input asp-for="Individual.Id" class="form-control" />
+                </div>
+                <div class="mb-3 row p-1">
+                    <label class="p-0">First Name</label>
+                    <input asp-for="Individual.FName" class="form-control" />
+                </div>
+                <div class="mb-3 row p-1">
+                    <label class="p-0">Last Name</label>
+                    <input asp-for="Individual.LName" class="form-control" />
+                </div>
+                <div class="mb-3 row p-1">
+                    <label class="p-0">University</label>
+                    <input asp-for="Individual.University" class="form-control" />
+                </div>
+                <div class="mb-3 row p-1">
+                    <label class="p-0">Year Of Graduation</label>
+                    <input asp-for="Individual.YearOfGraduation" class="form-control" />
+                </div>
+                <div class="mb-3 row p-1">
+                    <label class="p-0">Is Intern</label>
+                    <select asp-for="Individual.IsIntern" class="form-select" aria-label="Default select example">
+                        <option selected>Select menu</option>
+                        <option>False</option>
+                        <option>True </option>
+                    </select>
+                </div>
+                <div class="row">
+                    <div class="col-6 col-md-3">
+                        <button type="submit" class="btn btn-primary form-control">Add</button>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a asp-controller="Participant" asp-action="index" class="btn btn-secondary form-control border">Back To List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="Corporate" role="tabpanel" aria-labelledby="Corporate-tab">
+            <div class="border p-3 mt-4 ">
+                <div class="row pb-2">
+                    <h2 class="text-primary">
+                        Add New Corporate Participant
+                    </h2>
+                    <hr />
+                </div>
+                <div class="mb-3 row p-1">
+                    <label class="p-0">Corporate ID</label>
+                    <input asp-for="Corporate.Id" class="form-control" />
+                </div>
+                <div class="mb-3 row p-1">
+                    <label class="p-0">First Name</label>
+                    <input asp-for="Corporate.FName" class="form-control" />
+                </div>
+                <div class="mb-3 row p-1">
+                    <label class="p-0">Last Name</label>
+                    <input asp-for="Corporate.LName" class="form-control" />
+                </div>
+                <div class="mb-3 row p-1">
+                    <label class="p-0">Company</label>
+                    <input asp-for="Corporate.Company" class="form-control" />
+                </div>
+                <div class="mb-3 row p-1">
+                    <label class="p-0">Job Title</label>
+                    <input asp-for="Corporate.JobTitle" class="form-control" />
+                </div>
+                <div class="row">
+                    <div class="col-6 col-md-3">
+                        <button type="submit" class="btn btn-primary form-control">Add</button>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a asp-controller="Participant" asp-action="index" class="btn btn-secondary form-control border">Back To List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+}
+

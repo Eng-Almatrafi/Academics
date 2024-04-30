@@ -1,0 +1,70 @@
+﻿@model PaginatedList<Participant>
+
+<div class="container">
+    <div class="row pt-4 pb-3">
+        <div class="col-6">
+            <h2 class="text-primary">
+                Participant List
+            </h2>
+        </div>
+        <div class="col-6 text-end ">
+            <a asp-controller="Participant" asp-action="Add" class="btn btn-primary ">Add New Participant</a>
+        </div>
+    </div>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Full Name</th>
+        </thead>
+
+        <tbody>
+            @foreach (var Participant in Model.Entity)
+            {
+                <tr>
+                    <td>@Participant.Id</td>
+                    <td>@Participant.FullName</td>
+                    <td>
+                        <div class="w-100 btn-group " role="group">
+                            <a asp-controller="Participant" asp-action="Details" asp-route-Id="@Participant.Id" class="btn btn-info btn-sm mx-2 "><i class="bi bi-info-square"></i> Details</a>
+                            <a asp-controller="Participant" asp-action="Edit" asp-route-Id="@Participant.Id" class="btn btn-primary btn-sm mx-2 "><i class="bi bi-pencil-square "></i> Edit</a>
+                            <a asp-controller="Participant" asp-action="Delete" asp-route-Id="@Participant.Id" class="btn btn-danger btn-sm mx-2"><i class="bi bi-trash "></i> Delete</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            @if (Model.CurrentPage > 1)
+            {
+                <li class="page-item">
+                    <a class="page-link" href="/Participant/index?currentPage=@(Model.CurrentPage-1)" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+            }
+            @for (int i = 1; i <= Model.TotalPages; i++)
+            {
+                if (i == Model.CurrentPage)
+                {
+                    <li class="page-item"><a class="page-link active" href="/Participant/index?currentPage=@i"> @i</a></li>
+                }
+                else
+                {
+                    <li class="page-item"><a class="page-link" href="/Participant/index?currentPage=@i"> @i</a></li>
+                }
+            }
+            @if (Model.CurrentPage < Model.TotalPages)
+            {
+                <li class="page-item">
+                    <a class="page-link" href="/Participant/index?currentPage=@(Model.CurrentPage+1)" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            }
+        </ul>
+    </nav>
+</div>

@@ -1,0 +1,83 @@
+﻿@model SectionVM
+
+<form method="post">
+
+    <div class="border p-3 mt-4 ">
+        <div class="row pb-2">
+            <h2 class="text-primary">
+                Add New Section
+            </h2>
+            <hr />
+        </div>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div> @*her is validate on all fields   *@
+        <div class="mb-3 row p-1">
+            <label class="p-0">Section ID</label>
+            <input asp-for="Section.Id" class="form-control" />
+        </div>
+        <div class="mb-3 row p-1">
+            <label class="p-0">Section Name</label>
+            <input asp-for="Section.SectionName" class="form-control" />
+        </div>
+        <div class="mb-3 row p-1">
+            <label class="p-0">Start Date</label>
+            <input type="date" asp-for="Section.DateRange.StartDate" class="form-control" />
+        </div>
+        <div class="mb-3 row p-1">
+            <label class="p-0">End Date</label>
+            <input type="date" asp-for="Section.DateRange.EndDate" class="form-control" />
+        </div>
+        <div class="mb-3 row p-1">
+            <label class="p-0">Start Time</label>
+            <input type="time" asp-for="Section.TimeSlot.StartTime" class="form-control" />
+        </div>
+        <div class="mb-3 row p-1">
+            <label class="p-0">End Time</label>
+            <input type="time" asp-for="Section.TimeSlot.EndTime" class="form-control" />
+        </div>
+        <div class="mb-3 row p-1">
+            <label class="p-0">Select Course Name</label>
+            <select asp-for="Section.CourseId">
+
+                @foreach (var item in Model.Course)
+                {
+                    <option value="@item.Id">@item.CourseName</option>
+                }
+            </select>
+        </div>
+        <div class="mb-3 row p-1">
+            <label class="p-0">Select Instructor Name</label>
+            <select asp-for="Section.InstructorId">
+
+                @foreach (var item in Model.Instructors)
+                {
+                    <option value=@item.Id>@item.FullName</option>
+                }
+            </select>
+        </div>
+        <div class="mb-3 row p-1">
+            <label class="p-0">Select Schedual Type</label>
+            <select asp-for="Section.ScheduleId">
+
+                @foreach (var item in Model.Schedules)
+                {
+                    <option value=@item.Id>@item.ScheduleType</option>
+                }
+
+
+            </select>
+        </div>
+        <div class="row">
+            <div class="col-6 col-md-3">
+                <button type="submit" class="btn btn-primary form-control">Update</button>
+            </div>
+            <div class="col-6 col-md-3">
+                <a asp-controller="Section" asp-action="index" class="btn btn-secondary form-control border">Back To List</a>
+            </div>
+
+        </div>
+
+    </div>
+</form>
+
+
+

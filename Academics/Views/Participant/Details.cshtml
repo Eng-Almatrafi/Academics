@@ -1,0 +1,269 @@
+﻿@model ParticipantsVM
+
+<div class="card shadow border-0 mt-4" style="margin-bottom:150px">
+    <div class="card-header bg-secondary bg-gradient ml-0 rounded-2 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">@(Model.Individual != null ? "Individual" : "Coprporate") Participant Info</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <div class="row pb-3">
+            <div class="col-6">
+            </div>
+            <div class="col-6 text-end">
+                <a asp-controller="Participant" asp-action="index" class="btn btn-info" >
+                      Back To Participants List
+                </a>
+            </div>
+        </div>
+        <table class="table table-bordered table-striped" @(Model.Individual == null ? "hidden" : "")>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Full Name</th>
+                    <th>University</th>
+                    <th>Year Of Graduation</th>
+                    <th>Is Intern</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if(Model.Individual != null)
+                {
+                    <tr>
+                        <td>@Model.Individual.Id</td>
+                        <td>@Model.Individual.FullName</td>
+                        <td>@Model.Individual.University</td>
+                        <td>@Model.Individual.YearOfGraduation</td>
+                        <td>@Model.Individual.IsIntern</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <table class="table table-bordered table-striped" @(Model.Corporate == null ? "hidden" : "")>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Full Name</th>
+                    <th>Company</th>
+                    <th>Job Title</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Corporate != null)
+                {
+                    <tr>
+                        <td>@Model.Corporate.Id</td>
+                        <td>@Model.Corporate.FullName</td>
+                        <td>@Model.Corporate.Company</td>
+                        <td>@Model.Corporate.JobTitle</td>
+                    </tr>
+                }
+                
+            </tbody>
+        </table>
+    </div>
+    <div class="p-3">
+        <div class="row p-3">
+            <di class="col-6">
+                <h3>Section </h3>
+            </di>
+            <div class="col-6 text-end">
+                <a class="btn btn-secondary" data-bs-toggle="collapse" href="#Enrollment">Add New Section</a>
+            </div>
+        </div>
+        <div class="collapse p-2" id="Enrollment">
+            <form method="post">
+                <input asp-for="Enrollment.ParticipantId" value="@(Model.Individual!=null ?Model.Individual.Id :Model.Corporate.Id)" hidden />
+                <div asp-validation-summary="All" class="text-danger"></div> @*her is validate on all fields   *@
+                <div class="border p-3 mt-4" >
+                    <div class="row pb-2">
+                        <h2 class="text-primary">
+                            Register Participant in Section
+                        </h2>
+                        <hr />
+                    </div>
+                    <div class="mb-3 row p-1">
+                        <label class="p-0">Participant ID</label>
+                        <input asp-for="Enrollment.ParticipantId" value="@(Model.Individual!=null ?Model.Individual.Id :Model.Corporate.Id)" class="form-control" disabled />
+                    </div>
+                    <div class="mb-3 row p-1">
+                        <label class="p-0">Select Section</label>
+                        <select asp-for="@Model.Enrollment.SectionId">
+
+                            @foreach (var item in Model.Sections)
+                            {
+                                <option value=@item.Id>@item.SectionName</option>
+                                
+                            }
+                           
+                        </select>
+                        
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-6 col-md-3">
+                            <button type="submit" class="btn btn-primary form-control">Save</button>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <a asp-controller="Participant" asp-action="Details" class="btn btn-secondary form-control border">Cancel</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <table class="table table-bordered table-success" @(Model.Individual == null ? "hidden" : "")>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Section Name</th>
+                    <th>Date Range</th>
+                    <th>Time Slot</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Individual != null)
+                {
+                    foreach (var item in Model.Individual.Sections)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.SectionName</td>
+                            <td>@item.DateRange</td>
+                            <td>@item.TimeSlot</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+        <div class="p-3" @(Model.Individual == null ? "hidden" : "")>
+            <h3 class="mb-3">Schedule</h3>
+            <table class="table table-bordered table-info">
+                <thead>
+                    <tr>
+                        <th>Section ID</th>
+                        <th>Section Name</th>
+                        <th>ScheduleType</th>
+                        <th>SUN</th>
+                        <th>MON</th>
+                        <th>TUE</th>
+                        <th>WED</th>
+                        <th>THU</th>
+                        <th>FRI</th>
+                        <th>SAT</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Individual != null)
+                    {
+                        foreach (var section in Model.Individual.Sections)
+                        {
+                            int sectionId = section.Id;
+                            string sectionName = section.SectionName;
+                            string type = section.Schedule.ScheduleType.ToString();
+                            string sunday = section.Schedule.SUN ? " x" : "";
+                            string monday = section.Schedule.MON ? " x" : "";
+                            string tuesday = section.Schedule.TUE ? " x" : "";
+                            string wednesday = section.Schedule.WED ? " x" : "";
+                            string thursday = section.Schedule.THU ? " x" : "";
+                            string friday = section.Schedule.FRI ? " x" : "";
+                            string saturday = section.Schedule.SAT ? " x" : "";
+
+                            <tr>
+                                <td>@sectionId</td>
+                                <td>@sectionName</td>
+                                <td>@type</td>
+                                <td>@sunday</td>
+                                <td>@monday</td>
+                                <td>@tuesday</td>
+                                <td>@wednesday</td>
+                                <td>@thursday</td>
+                                <td>@friday</td>
+                                <td>@saturday</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+
+        </div>
+        <table class="table table-bordered table-success" @(Model.Corporate == null ? "hidden" : "")>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Section Name</th>
+                    <th>Date Range</th>
+                    <th>Time Slot</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Corporate != null)
+                {
+                    foreach (var item in Model.Corporate.Sections)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.SectionName</td>
+                            <td>@item.DateRange</td>
+                            <td>@item.TimeSlot</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+        <div class="p-3" @(Model.Corporate == null ? "hidden" : "")>
+            <h3 class="mb-3">Schedule</h3>
+            <table class="table table-bordered table-info">
+                <thead>
+                    <tr>
+                        <th>Section ID</th>
+                        <th>Section Name</th>
+                        <th>ScheduleType</th>
+                        <th>SUN</th>
+                        <th>MON</th>
+                        <th>TUE</th>
+                        <th>WED</th>
+                        <th>THU</th>
+                        <th>FRI</th>
+                        <th>SAT</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Corporate != null)
+                    {
+                        foreach (var section in Model.Corporate.Sections)
+                        {
+                            int sectionId = section.Id;
+                            string sectionName = section.SectionName;
+                            string type = section.Schedule.ScheduleType.ToString();
+                            string sunday = section.Schedule.SUN ? " x" : "";
+                            string monday = section.Schedule.MON ? " x" : "";
+                            string tuesday = section.Schedule.TUE ? " x" : "";
+                            string wednesday = section.Schedule.WED ? " x" : "";
+                            string thursday = section.Schedule.THU ? " x" : "";
+                            string friday = section.Schedule.FRI ? " x" : "";
+                            string saturday = section.Schedule.SAT ? " x" : "";
+
+                            <tr>
+                                <td>@sectionId</td>
+                                <td>@sectionName</td>
+                                <td>@type</td>
+                                <td>@sunday</td>
+                                <td>@monday</td>
+                                <td>@tuesday</td>
+                                <td>@wednesday</td>
+                                <td>@thursday</td>
+                                <td>@friday</td>
+                                <td>@saturday</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,37 @@
+﻿@model Course
+
+<form method="post">
+    <input asp-for="Id" hidden />
+    <div class="border p-3 mt-4 ">
+        <div class="row pb-2">
+            <h2 class="text-primary">
+                Edit Course
+            </h2>
+            <hr />
+        </div>
+        <div class="mb-3 row p-1">
+            <label class="p-0">Course ID</label>
+            <input asp-for="Id" class="form-control" required/>
+        </div>
+        <div class="mb-3 row p-1">
+            <label class="p-0">Course Name</label>
+            <input asp-for="CourseName" class="form-control" required />
+        </div>
+        <div class="mb-3 row p-1">
+            <label class="p-0">Price</label>
+            <input asp-for="Price" class="form-control" required />
+        </div>
+        <div class="mb-3 row p-1">
+            <label class="p-0">Hours To Complete</label>
+            <input asp-for="HoursToComplete" class="form-control" required />
+        </div>
+        <div class="row">
+            <div class="col-6 col-md-3">
+                <button type="submit" class="btn btn-primary form-control">Submit</button>
+            </div>
+            <div class="col-6 col-md-3">
+                <a asp-controller="Course" asp-action="index" class="btn btn-secondary form-control border">Back To List</a>
+            </div>
+        </div>
+    </div>
+</form>

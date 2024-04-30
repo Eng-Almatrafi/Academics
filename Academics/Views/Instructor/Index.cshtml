@@ -1,0 +1,83 @@
+﻿@model PaginatedList<Instructor>
+
+<div class="container">
+    <div class="row pt-4 pb-3">
+        <div class="col-6">
+            <h2 class="text-primary">
+                Instructors List
+            </h2>
+        </div>
+        <div class="col-6 text-end ">
+            <a asp-controller="Instructor" asp-action="AddInstructor" class="btn btn-primary ">Add New Instructor</a>
+        </div>
+    </div>
+    <form asp-action="index">
+        <div class="row pt-3 mb-3">
+            <div class="col-md-6">
+                <input class="form-control" placeholder="Search her" name="term" />
+            </div>
+            <div class="col-md-4">
+                <button class="btn btn-info " type="submit">Search</button>
+            </div>
+        </div>
+    </form>
+   
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Full Name</th>
+                <th>Office Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model.Entity)
+            {
+                <tr>
+                    <td>@obj.Id</td>
+                    <td>@obj.FullName</td>
+                    <td>@obj.Office?.OfficeName</td>
+                    <td>
+                        <div class="w-100 btn-group" role="group">
+                            <a asp-controller="Instructor" asp-action="Edit" asp-route-Id="@obj.Id" class="btn btn-primary mx-2 "><i class="bi bi-pencil-square "></i> Edit</a>
+                            <a asp-controller="Instructor" asp-action="Delete" asp-route-Id="@obj.Id" class="btn btn-danger mx-2"><i class="bi bi-trash "></i> Delete</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            @if (Model.CurrentPage > 1)
+            {
+                <li class="page-item">
+                    <a class="page-link" href="/Instructor/index?term=@Model.Term&currentPage=@(Model.CurrentPage-1)" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+            }
+            @for (int i = 1; i <= Model.TotalPages; i++)
+            {
+                if (i == Model.CurrentPage)
+                {
+                    <li class="page-item"><a class="page-link active" href="/Instructor/index?term=@Model.Term&currentPage=@i"> @i</a></li>
+                }
+                else
+                {
+                    <li class="page-item"><a class="page-link" href="/Instructor/index?term=@Model.Term&currentPage=@i"> @i</a></li>
+                }
+            }
+            @if (Model.CurrentPage < Model.TotalPages)
+            {
+                <li class="page-item">
+                    <a class="page-link" href="/Instructor/index?term=@Model.Term&currentPage=@(Model.CurrentPage+1)" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            }
+        </ul>
+    </nav>
+
+    </div>
+
